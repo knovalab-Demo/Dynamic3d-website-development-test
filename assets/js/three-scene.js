@@ -1,11 +1,13 @@
 import * as THREE from 'https://unpkg.com/three@0.160.0/build/three.module.js';
 import { GLTFLoader } from 'https://unpkg.com/three@0.160.0/examples/jsm/loaders/GLTFLoader.js';
 
+/* BASIC SETUP */
+
 const container = document.getElementById('three-container');
 
-const scene = new THREE.Scene();
+export const scene = new THREE.Scene();
 
-const camera = new THREE.PerspectiveCamera(
+export const camera = new THREE.PerspectiveCamera(
   45,
   window.innerWidth / window.innerHeight,
   0.1,
@@ -14,7 +16,7 @@ const camera = new THREE.PerspectiveCamera(
 
 camera.position.set(0, 0, 6);
 
-const renderer = new THREE.WebGLRenderer({
+export const renderer = new THREE.WebGLRenderer({
   alpha: true,
   antialias: true
 });
@@ -23,7 +25,7 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 container.appendChild(renderer.domElement);
 
-/* Lighting */
+/* LIGHTING */
 
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
 scene.add(ambientLight);
@@ -32,9 +34,9 @@ const directionalLight = new THREE.DirectionalLight(0xffffff, 1.2);
 directionalLight.position.set(5, 5, 5);
 scene.add(directionalLight);
 
-/* Load Model */
+/* MODEL */
 
-let model;
+export let model = null;
 
 const loader = new GLTFLoader();
 
@@ -46,14 +48,10 @@ loader.load(
 
     model.position.set(0, 0, 0);
     model.scale.set(1, 1, 1);
-  },
-  undefined,
-  (error) => {
-    console.error(error);
   }
 );
 
-/* Render Loop */
+/* RENDER LOOP */
 
 function animate() {
   requestAnimationFrame(animate);
@@ -62,7 +60,7 @@ function animate() {
 
 animate();
 
-/* Resize */
+/* RESIZE */
 
 window.addEventListener('resize', () => {
   camera.aspect = window.innerWidth / window.innerHeight;
