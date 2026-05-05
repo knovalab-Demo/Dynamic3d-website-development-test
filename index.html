@@ -1,47 +1,256 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Cinematic Photography</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Knovalab 3D Experience</title>
+  <meta name="description" content="Immersive digital experiences powered by 3D." />
+  <meta name="theme-color" content="#0b0b0b" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <style>
+    /* Safe structural enhancements only.
+       Keeps your existing JS logic untouched and only improves layout fallback/mobile behavior. */
 
-  <!-- CSS -->
-  <link rel="stylesheet" href="assets/css/style.css">
+    :root{
+      --page-pad: clamp(16px, 4vw, 40px);
+      --content-max: 1180px;
+      --panel-space: clamp(80px, 12vw, 140px);
+      --card-gap: clamp(16px, 2vw, 24px);
+    }
+
+    *{
+      box-sizing:border-box;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      margin:0;
+      min-height:100vh;
+      overflow-x:hidden;
+    }
+
+    img{
+      max-width:100%;
+      display:block;
+      height:auto;
+    }
+
+    button{
+      font:inherit;
+      cursor:pointer;
+    }
+
+    #three-container{
+      position:fixed;
+      inset:0;
+      z-index:0;
+      pointer-events:none;
+    }
+
+    .panel{
+      position:relative;
+      z-index:1;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      padding:var(--panel-space) var(--page-pad);
+    }
+
+    .content{
+      width:min(100%, var(--content-max));
+      margin:0 auto;
+    }
+
+    .hero .content{
+      max-width:760px;
+    }
+
+    .hero h1,
+    .panel h2{
+      margin:0 0 16px;
+      line-height:0.95;
+      text-wrap:balance;
+    }
+
+    .hero h1{
+      font-size:clamp(44px, 10vw, 110px);
+    }
+
+    .panel h2{
+      font-size:clamp(28px, 6vw, 56px);
+    }
+
+    .hero p,
+    .panel p{
+      max-width:62ch;
+      line-height:1.8;
+      text-wrap:pretty;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:48px;
+      padding:12px 22px;
+      margin-top:24px;
+      border-radius:999px;
+      border:none;
+      white-space:nowrap;
+    }
+
+    .two-col{
+      display:grid;
+      grid-template-columns:minmax(0, 1fr) minmax(280px, 420px);
+      gap:clamp(24px, 4vw, 48px);
+      align-items:center;
+    }
+
+    .two-col img{
+      width:100%;
+      aspect-ratio:4 / 5;
+      object-fit:cover;
+      border-radius:20px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0, 1fr));
+      gap:var(--card-gap);
+      margin-top:28px;
+    }
+
+    .card{
+      min-height:180px;
+      display:flex;
+      align-items:end;
+      padding:20px;
+      border-radius:20px;
+    }
+
+    .pricing{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0, 1fr));
+      gap:var(--card-gap);
+      margin-top:28px;
+    }
+
+    .price-card{
+      min-height:180px;
+      display:flex;
+      align-items:end;
+      padding:20px;
+      border-radius:20px;
+    }
+
+    @media (max-width: 900px){
+      .panel{
+        min-height:auto;
+      }
+
+      .two-col{
+        grid-template-columns:1fr;
+      }
+
+      .two-col > div:last-child{
+        order:-1;
+      }
+
+      .grid{
+        grid-template-columns:1fr;
+      }
+
+      .pricing{
+        grid-template-columns:1fr;
+      }
+
+      .card,
+      .price-card{
+        min-height:140px;
+      }
+    }
+
+    @media (max-width: 560px){
+      .panel{
+        padding-top:72px;
+        padding-bottom:72px;
+      }
+
+      .hero h1{
+        font-size:clamp(38px, 14vw, 64px);
+      }
+
+      .btn{
+        width:100%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      html{
+        scroll-behavior:auto;
+      }
+    }
+  </style>
 </head>
-
 <body>
 
-  <div id="three-container"></div>
+  <!-- 3D BACKGROUND -->
+  <div id="three-container" aria-hidden="true"></div>
 
-<section class="panel">
-  <div class="content">
-    <h1>Cinematic Photography</h1>
-  </div>
-</section>
+  <main>
+    <!-- HERO -->
+    <section class="panel hero" id="home">
+      <div class="content">
+        <h1>HELLO!</h1>
+        <p>I create immersive digital experiences powered by 3D.</p>
+        <button class="btn" type="button">View Work</button>
+      </div>
+    </section>
 
-<section class="panel">
-  <div class="content">
-    <h2>Professional Shoots</h2>
-  </div>
-</section>
+    <!-- ABOUT -->
+    <section class="panel section-dark" id="about">
+      <div class="content two-col">
+        <div>
+          <h2>ABOUT ME</h2>
+          <p>
+            I build cinematic websites that combine modern UI with
+            interactive 3D storytelling.
+          </p>
+        </div>
+        <div>
+          <img src="https://picsum.photos/400/500?grayscale" alt="Creative portrait preview" loading="lazy" />
+        </div>
+      </div>
+    </section>
 
-<section class="panel">
-  <div class="content">
-    <h2>Creative Direction</h2>
-  </div>
-</section>
+    <!-- PORTFOLIO -->
+    <section class="panel section-darker" id="portfolio">
+      <div class="content">
+        <h2>PORTFOLIO</h2>
+        <div class="grid">
+          <div class="card">Project One</div>
+          <div class="card">Project Two</div>
+          <div class="card">Project Three</div>
+          <div class="card">Project Four</div>
+        </div>
+      </div>
+    </section>
 
-<section class="panel">
-  <div class="content">
-    <h2>Studio Experience</h2>
-  </div>
-</section>
-
-<section class="panel">
-  <div class="content">
-    <h2>Book Your Session</h2>
-  </div>
-</section>
+    <!-- PRICING -->
+    <section class="panel section-dark" id="pricing">
+      <div class="content">
+        <h2>PRICING PLANS</h2>
+        <div class="pricing">
+          <div class="price-card">Basic</div>
+          <div class="price-card">Standard</div>
+          <div class="price-card">Premium</div>
+        </div>
+      </div>
+    </section>
+  </main>
 
   <!-- JS -->
   <script type="module" src="assets/js/three-scene.js"></script>
