@@ -40,8 +40,7 @@ export let model = null;
 
 const loader = new GLTFLoader();
 
-loader.load(
-  '/assets/3d/models/seperated__camcorder.glb',
+loader.load('./assets/3d/models/seperated__camcorder.glb',
   (gltf) => {
     model = gltf.scene;
     scene.add(model);
